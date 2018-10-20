@@ -50,7 +50,7 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Mod Programming Basics</h1>
+							<h1>Mod Programming Setup</h1>
                             <p>This tutorial will teach you the basics of setting up your mod workspace and assumes you already have the proper Java tools installed as well as prior Java or programming knowledge.</p>
                             <section>
                                 <span>
@@ -58,9 +58,50 @@
                                 <p>By <a href="../authors.html">SoggyMustache</a></p>                        
                                 </span>
 								<p>
-                                Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.
+                                The first thing that you are going to need is an IDE, in this tutorial and all others we will use Eclipse but any other IDE will work just fine as long as you know how to get Forge running in it.
+                                <br/>
+                                You can find the latest download for eclipse at <a href="https://www.eclipse.org/downloads/packages/" target="_blank">eclipse.org/downloads/packages/</a>. Once you have found and downloaded the Eclipse IDE For Java Developers you should save it to a location where you are going to be able to open it later.
+                                <br/>
+                                <br/>
+                                <span class="image left"><img src="images/forgedropdown.png" alt="" /></span> The next step is going to be getting the Forge files for the mod so start by going to <a href="https://files.minecraftforge.net" target="_blank">files.minecraftforge.net</a>. On the left side you will see a dropdown for the different Forge versions. Make sure that you select either 1.12, 1.12.1, or 1.12.2 as those are the versions that all the programming tutorials are on.                                
                                 </p>
+                                <br/>
+                                <p>
+                                 <span class="image left"><img src="images/forgedownload.png" alt="" /></span> Once you have selected the version you are going to be making your mod in you will see two boxes for either the Latest or Recommended version. You can select whichever one of the two you would like your mod to be in. Once you decide which you are using click and download the MDK.                            
+                                </p>
+                                <br/>
+                                <section>
+                                <p>
+                                    After you have downloaded the proper files for the Forge version you are using you should create a new folder where ever you are going to be keeping your mods EX: (C:/Users/SoggyMustache/Documents/Mods/TutorialMod) and transfer the files from the ZIP you downloaded from forge into your project folder. After that you will want to open either Windows PowerShell or the Command Prompt in the folder location and run the following commands 
+                                    
+                                </p>
+                                <pre>gradlew setupDecompWorkspace eclipse</pre> <p>for the Command Prompt</p><br/><p>or</p>
+                                <pre>./gradlew setupDecompWorkspace eclipse</pre> <p>for the Windows PowerShell</p>
+                                </section>
                                 
+                                <section>
+                                <p>These commands can take quite a while to run especially if its your first time so be patient!<br/><br/> Once the two commands have run you can open the Eclipse program that you downloaded earlier and the below popup (or similar) will appear</p>
+                                <img src="images/eclipselaunch.PNG">
+                                <p>When you see the popup you should either type in the path to project folder making sure that it ends with \eclipse or select Browse and navigate to the project again selecting the eclipse folder. After the path is properly selected you can click the Launch button and you will be ready to start actually putting code into your mod.</p>
+                                </section>
+                                
+                                <h1>Comments</h1>
+                                <div id="disqus_thread"></div>
+                                <script>
+
+                                var disqus_config = function () {
+                                this.page.url = "https://moddingtutorials.github.io/coding/basics.html";  // Replace PAGE_URL with your page's canonical URL variable
+                                this.page.identifier = "codingBasics"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                                };
+                                
+                                (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://moddingtutorials-1.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                                })();
+                                </script>
+                                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                             </section>
 						</div>
 					</div>
