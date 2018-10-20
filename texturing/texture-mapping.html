@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Modding Tutorials</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/grassblock.png" alt="" /></span><span class="title">MC Tutorials</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="../index.html">Home</a></li>
+							<li><a href="../coding.html">Coding</a></li>
+							<li><a href="../modeling.html">Modeling</a></li>
+							<li><a href="../texturing.html">Texturing</a></li>
+							<li><a href="../authors.html">Authors</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Entity Texture Mapping</h1>
+							<p><b>First and foremost,</b> it is only recommended to start your textures after your model is finished! It is a big hassle to change the texture if any parts of the model have been resized, or if the model's texture map has been changed. So do your best to make sure you are happy with your model before beginning this step!
+								<br>
+								The first part of texturing is a very important part of the model's file, so keep that open or open it back up.</p>
+								
+                            <section>
+                                <span>
+								<img src="../images/mnesikos.jpg" width="50px">
+								<p>By <a href="../authors.html">Mnesikos</a></p>                        
+                                </span>
+								
+								<p><b>Terms to Know</b>
+									<br>
+									<u>Texture map</u> - where the model "reads" what to draw on each block's faces, not to be confused with the project's texture.
+									<br>
+									<u>Project texture</u> - the actual texture you wish to load onto your model, not to be confused with the project's texture map.
+									<br>
+									<u>Dimensions</u> - size, proportions, or width and height of an image.</p>
+									
+								<p><b>Texture Map Dimensions</b>
+									<br>
+									Check your model's texture map dimensions by going to "Edit Project" in the top left-hand corner. A window will pop up with various information. "Texture width and height" is our focus here.
+									<br>
+									These dimensions should typically be multiples of 16, and make sure it is large enough to fit all the model pieces! You can always come back to edit this, so play around with it as you like.
+									<br>
+									<i>Tip: It's best to leave as little white space as possible, without breaking the general rule of being multiples of 16.</i></p>
+								
+								<p><b>Texture Layout: Automatically</b>
+									<br>
+									Now you have two options; layout the texture map pieces manually, or use the Tabula button to automatically lay them out for you! If you would like to know how to manually layout your texture map, feel free to skip to the next section.
+									<br>
+									Otherwise, locate the "Automatically Layout Textures" button on the tool bar at the top of Tabula. It is the 15th button from the left, 5th button from the right, and looks like four puzzle pieces. If you get an error, read the Texture Overlaps section!</p>
+								
+								<p><b>Texture Layout: Manually</b>
+									<br>
+									To manually layout each texture piece for your model, you will need to select one piece at a time and edit the "Texture Offset" under controls, on the left-hand side of the screen. You can see exactly how the piece is moving by referencing the top-left image.
+									<br>
+									<i>Tip: Instead of straining your eyes to see the tiny movement of the texture map pieces, try resizing that window by dragging the edges to the left and downwards!</i></p>
+								
+								<p><b>Texture Overlaps</b>
+									<br>
+									Be sure no pieces overlap unless you specifically intend for them to be! An example of good overlaps would be with mirrored pieces that are meant to be symmetrical. If you have unintended overlaps, or if you get a texture layout error, try making the texture map larger as we described in the Texture Map Dimensions section.</p>
+								
+								<p><b>That's it!</b>
+									<br>
+									Once you have completed the above steps, and are happy with your texture map result, save your project and there you have it! You now have a properly laid out texture map.
+									<br>
+									To acquire an image of your texture map, locate the "export" button on the toolbar at the top of Tabula and select "Texture Map" from the window that pops up. Now if you navigate to your mods folder > tabula > export, you will find the image there! Good luck and have fun texturing!
+									<br>
+									<i>Tip: If you would like more detail in your texture, you do not need to edit your model's texture map! Simply increase your texture's resolution with an image editing program of your choice. This is explained in <a href="texturing/resolution.html">another tutorial</a>!</i></p>
+                                
+                            </section>
+						</div>
+					</div>
+
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
