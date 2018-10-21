@@ -68,31 +68,31 @@
                                 <p>
                                 The first way to send a message will be Hot Bar Messages. You can send hot bar messages by using the following code.
                                 </p>
-                                <pre>
+                                <pre><code>
 if(world.isRemote) {
     TextComponentString text = new TextComponentString("TEST MESSAGE");
     player.sendStatusMessage(text, true);
 }
-                                </pre>
+                                </code></pre>
                                 <p>In the above example we first make sure that we are only sending the message on the client, this will ensure that the player doesnt recieve the message twice. Then we create a new TextComponentString which we store our message in and then lastly we send the status message to the player passing the arguments of our message and then whether or not it should be in the action bar which in this case it should be.</p>
                                     
                                 <h1>Chat Messages</h1>
                                 <p>
                                 The second way to send a message will be Chat Messages, this is one of the ways you will probably use most often. You can send chat messages by using the following code.
                                 </p>
-                                <pre>
+                                <pre><code>
 if(world.isRemote) {
     TextComponentString text = new TextComponentString("TEST MESSAGE");
     player.sendMessage(text);
 }
-                                </pre>
+                                </code></pre>
                                 <p>The same applies in sending Chat Messages as it does in sending Hot Bar Messages. The only difference is how we actually send it to the player by using sendMessage instead of sendStatusMessage.</p>
                                     
                                 <h1>Toast Messages</h1>
                                 <p>
                                 The last way to send a message will be Toast Messages, this method is less likely to be used but still looks nice and can be the best way to go depending on what you are doing. To start off you are going to need to create a new class for using your toast messages.
                                 </p>
-                                <pre>
+                                <pre><code>
 import net.minecraft.client.gui.toasts.GuiToast;
 import net.minecraft.client.gui.toasts.IToast;
 import net.minecraft.client.renderer.GlStateManager;
@@ -121,13 +121,13 @@ public class ToastMessage implements IToast{
 
 }
 
-                                </pre>
+                                </code></pre>
                                 <p>There is a lot going on in the class above. What is basically happening is the class will take a message as its parameter and then will attempt at splitting the message to at the most two lines. Depending on what you are doing you may need to modify how the code handles the message but the above should work for most basic messages. Then it will make the Toast visible or hidden depending on how long it has appeared for. Next will be how to send the message</p>
-                                <pre>
+                                <pre><code>
 if(world.isRemote){
     Minecraft.getMinecraft().getToastGui().add(new ToastMessage("TEST MESSAGE"));
 }
-                                </pre>
+                                </code></pre>
                                 <p>In the above we are sending the Toast Message to the Minecraft toast GUI only if the world is client, it is VERY important that you only send to the client as the Toast GUI does not exist in servers since it is a client class.</p>
                                 </section>
 
