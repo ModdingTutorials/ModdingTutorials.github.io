@@ -53,12 +53,13 @@
 							<h1>Mod Programming Setup</h1>
                             <p>This tutorial will teach you the basics of setting up your mod workspace and assumes you already have the proper Java tools installed as well as prior Java or programming knowledge.</p>
                             <section>
-                                <span>
+							<button class="collapsible">Eclipse</button>
+								<div class="content" style="display: none;">
+								<span>
 								<img src="../images/Soggy.PNG" width="50px">
                                 <p>By <a href="../authors.html">SoggyMustache</a></p>                        
                                 </span>
 								<p>
-                                The first thing that you are going to need is an IDE, in this tutorial and all others we will use Eclipse but any other IDE will work just fine as long as you know how to get Forge running in it.
                                 <br/>
                                 You can find the latest download for eclipse at <a href="https://www.eclipse.org/downloads/packages/" target="_blank">eclipse.org/downloads/packages/</a>. Once you have found and downloaded the Eclipse IDE For Java Developers you should save it to a location where you are going to be able to open it later.
                                 <br/>
@@ -84,8 +85,28 @@
                                 <img src="images/eclipselaunch.PNG">
                                 <p>When you see the popup you should either type in the path to project folder making sure that it ends with \eclipse or select Browse and navigate to the project again selecting the eclipse folder. After the path is properly selected you can click the Launch button and you will be ready to start actually putting code into your mod.</p>
                                 </section>
-                                
-                                <h1>Comments</h1>
+								</div>
+							<button class="collapsible">Intellij</button>
+								<div class="content" style="display: none;">
+									<p>this is not done yet..</p>
+								</div>
+							<script>
+									var coll = document.getElementsByClassName("collapsible");
+									var i;
+
+									for (i = 0; i < coll.length; i++) {
+										coll[i].addEventListener("click", function() {
+											this.classList.toggle("active");
+											var content = this.nextElementSibling;
+											if (content.style.display === "block") {
+												content.style.display = "none";
+											} else {
+											content.style.display = "block";
+											}
+										});
+									}
+							</script>
+							<h1>Comments</h1>
                                 <div id="disqus_thread"></div>
                                 <script>
 
