@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Modding Tutorials</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/grassblock.png" alt="" /></span><span class="title">MC Tutorials</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="../index.html">Home</a></li>
+							<li><a href="../coding.html">Coding</a></li>
+							<li><a href="../modeling.html">Modeling</a></li>
+							<li><a href="../texturing.html">Texturing</a></li>
+							<li><a href="../authors.html">Authors</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Providing Player Feedback</h1>
+                            <p>This tutorial which teach you about multiple different ways to interact and send the plyer textual information.</p>
+                            <section>
+                                <span>
+								<img src="../images/Soggy.PNG" width="50px">
+                                <p>By <a href="../authors.html">SoggyMustache</a></p>                        
+                                </span>
+                                <section>
+								<p>
+                                There are many different ways that you can send textual information to the player Hot Bar Messages, Chat Message, and Toasts are going to be covered in this tutorial. Anytime that something happens and you have a <strong>EntityPlayer</strong> object you can send these messages for example if the player starts riding an entity or right clicks an item.
+                                <br/>
+                                <br/>
+                                Before going into more detail make note that at anytime in your TextComponentStrings you can include TextFormatting.some_variable_in_the_class to change the colour and/or formatting of your message.
+                                </p>
+                                <h1>Hot Bar Messages</h1>
+                                <p>
+                                The first way to send a message will be Hot Bar Messages. You can send hot bar messages by using the following code.
+                                </p>
+                                <pre>
+if(world.isRemote) {
+    TextComponentString text = new TextComponentString("TEST MESSAGE");
+    player.sendStatusMessage(text, true);
+}
+                                </pre>
+                                <p>In the above example we first make sure that we are only sending the message on the client, this will ensure that the player doesnt recieve the message twice. Then we create a new TextComponentString which we store our message in and then lastly we send the status message to the player passing the arguments of our message and then whether or not it should be in the action bar which in this case it should be.</p>
+                                    
+                                <h1>Chat Messages</h1>
+                                <p>
+                                The second way to send a message will be Chat Messages, this is one of the ways you will probably use most often. You can send chat messages by using the following code.
+                                </p>
+                                <pre>
+if(world.isRemote) {
+    TextComponentString text = new TextComponentString("TEST MESSAGE");
+    player.sendMessage(text);
+}
+                                </pre>
+                                <p>The same applies in sending Chat Messages as it does in sending Hot Bar Messages. The only difference is how we actually send it to the player by using sendMessage instead of sendStatusMessage.</p>
+                                    
+                                <h1>Toast Messages</h1>
+                                <p>
+                                The last way to send a message will be Toast Messages, this method is less likely to be used but still looks nice and can be the best way to go depending on what you are doing. To start off you are going to need to create a new class for using your toast messages.
+                                </p>
+                                <pre>
+import net.minecraft.client.gui.toasts.GuiToast;
+import net.minecraft.client.gui.toasts.IToast;
+import net.minecraft.client.renderer.GlStateManager;
+
+public class ToastMessage implements IToast{
+	
+	private String message;
+	
+	public ToastMessage(String message) {
+		this.message = message;
+	}
+	
+	@Override
+	public Visibility draw(GuiToast toastGui, long delta) {
+        toastGui.getMinecraft().getTextureManager().bindTexture(TEXTURE_TOASTS);
+        GlStateManager.color(1.0F, 1.0F, 1.0F);
+        toastGui.drawTexturedModalRect(0, 0, 0, 0, 160, 32);
+        if(message.length() >= 27) {
+        	toastGui.getMinecraft().fontRenderer.drawString(message.substring(0, 27), 7, 7, 0xFFFFFF);
+        	toastGui.getMinecraft().fontRenderer.drawString(message.substring(27), 7, 17, 0xFFFFFF);
+        }
+        else
+        	toastGui.getMinecraft().fontRenderer.drawString(message, 7, 7, 0xFFFFFF);
+        return delta >= 1000L + (message.length() * 7) ? IToast.Visibility.HIDE : IToast.Visibility.SHOW;
+	}
+
+}
+
+                                </pre>
+                                <p>There is a lot going on in the class above. What is basically happening is the class will take a message as its parameter and then will attempt at splitting the message to at the most two lines. Depending on what you are doing you may need to modify how the code handles the message but the above should work for most basic messages. Then it will make the Toast visible or hidden depending on how long it has appeared for. Next will be how to send the message</p>
+                                <pre>
+if(world.isRemote){
+    Minecraft.getMinecraft().getToastGui().add(new ToastMessage("TEST MESSAGE"));
+}
+                                </pre>
+                                <p>In the above we are sending the Toast Message to the Minecraft toast GUI only if the world is client, it is VERY important that you only send to the client as the Toast GUI does not exist in servers since it is a client class.</p>
+                                </section>
+
+                                <h1>Comments</h1>
+                                <div id="disqus_thread"></div>
+                                <script>
+
+                                var disqus_config = function () {
+                                this.page.url = "https://moddingtutorials.github.io/coding/feedback.html";  // Replace PAGE_URL with your page's canonical URL variable
+                                this.page.identifier = "codingFeedbackPlayer"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                                };
+                                
+                                (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://moddingtutorials-1.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                                })();
+                                </script>
+                                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            </section>
+						</div>
+					</div>
+
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
