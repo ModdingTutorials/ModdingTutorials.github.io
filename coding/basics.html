@@ -87,10 +87,43 @@
                                 <p>When you see the popup you should either type in the path to project folder making sure that it ends with \eclipse or select Browse and navigate to the project again selecting the eclipse folder. After the path is properly selected you can click the Launch button and you will be ready to start actually putting code into your mod.</p>
                                 </section>
 								</div>
-							
 							<button class="button primary fit">Intellij</button>
 								<div class="content" style="display: none;">
-									<p>this is not done yet..</p>
+								<br/>
+								<span>
+								<img src="../images/random2.png" width="100px">
+                                <p>By <a href="../authors.html">Ms. Random</a></p>                        
+                                </span>
+								<p>
+                                <br/>
+                                First download the latest version of Intellij from <a href="https://www.jetbrains.com/idea/download/" target="_blank">jetbrains.com/idea/download/</a>.
+                                <br/>
+                                <br/>
+                                <span class="image left"><img src="images/forgedropdown.png" alt="" /></span> The next step is going to be getting the Forge files for the mod so start by going to <a href="https://files.minecraftforge.net" target="_blank">files.minecraftforge.net</a>. On the left side you will see a dropdown for the different Forge versions. Make sure that you select either 1.12, 1.12.1, or 1.12.2 as those are the versions that all the programming tutorials are on.                                
+                                </p>
+                                <br/>
+                                <p>
+                                 <span class="image left"><img src="images/forgedownload.png" alt="" /></span> Once you have selected the version you are going to be making your mod in you will see two boxes for either the Latest or Recommended version. You can select whichever one of the two you would like your mod to be in. Once you decide which you are using click and download the MDK.                            
+                                </p>
+                                <br/>
+                                <section>
+                                <p>
+                                    After you're done downloading the file, Transfer the files of the archive to a new folder, Name your folder whatever you want your project name to be without spaces, For example if your mod's name is "New Dragon Mod" name it "NewDragonMod".
+									<br/>
+									Edit <code>build.gradle</code> and setup your <code>version</code>, <code>group</code> and <code>archivesBaseName</code>.
+									<br/>
+									<span class="image left"><img src="images/idea-gradle-screen.png" alt="" /></span>Next open Intellij(Which I'm going to refer to as Idea from now on.) and click <br/><code>import project</code>, Then select <code>build.gradle</code>, And choose a gradle JVM(Do <b>NOT</b> select <code>Use Project JDK</code> unless you already have your default project structure setup, which if you do i'd assume you don't need this tutorial).
+                                </p>
+								<br/>
+								<p>
+									<span class="image left"><img src="images/idea-add-config.png" alt="" /></span>Click the <code>Add Configuration...</code> button from the top right, And add 2 new gradle configurations, Set the project in both of them as whatever you named your folder, And the tasks as <code>genIntellijRuns</code>, <code>setupDecompWorkspace</code> and run both of them at least once, After that click on View, Tool Windows, Gradle, And click the refresh button, Which should look like this:
+									<br/>
+									<span class="image left"><img src="images/idea-refresh.png" alt="" /></span>
+									<br/>
+									<br/>
+									After it's done, You should be ready to start actually putting code into your mod.
+								</p>
+                                </section>
 								</div>
 							<script>
 									var coll = document.getElementsByClassName("button primary");
