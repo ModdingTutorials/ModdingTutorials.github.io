@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Modding Tutorials</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/grassblock.png" alt="" /></span><span class="title">MC Tutorials</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="../index.html">Home</a></li>
+							<li><a href="../coding.html">Coding</a></li>
+							<li><a href="../modeling.html">Modeling</a></li>
+							<li><a href="../texturing.html">Texturing</a></li>
+							<li><a href="../authors.html">Authors</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Networking</h1>
+                            <p>This tutorial will teach you about basic networking.</p>
+                            <section>
+                                <span>
+								<img src="../images/Soggy.PNG" width="50px">
+                                <p>By <a href="../authors.html">SoggyMustache</a></p>                        
+                                </span>
+                                <section>
+                                    <section>
+                                        <p>Before you start with networking you need to know what world.isRemote means as well as when you can use Minecraft.getMinecraft().player.
+                                        <br/><br/>
+                                        To start world.isRemote can be called when the world variable is of the Minecraft World Object. The isRemote boolean will return true if the world is 'remote' or client and false if the world is a server. Chances are you have already seen this if you have ever sent text to the player, opened a info book gui, made an item drop on command, etc.
+                                        <br/>
+                                        Knowing when you can use Minecraft.getMinecraft().player ("mcplayer"). You can use the mcplayer when you are on the client side only, if you need a multiplayer player you are going to have to get it from your message context in the case of networking.
+                                        </p> 
+                                    </section>    
+                                <h1>
+                                Setting up your PacketHandler
+                                </h1>
+                                    <section>
+                                    <p>When you are networking you are going to need to use a PacketHandler class, the class will handle the registration of your packets as well as provide a way for us to actually send the data.</p>
+                                    
+                                        <pre>
+                                        <code>
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+
+public class PacketHandler {
+	public static SimpleNetworkWrapper net;
+	private static int id = 0;
+
+	public static void initPackets() {
+		net = NetworkRegistry.INSTANCE.newSimpleChannel(MY_MOD_ID.toUpperCase());
+	}
+
+	private static void registerMessage(Side side, Class packet, Class message) {
+		net.registerMessage(packet, message, nextPacketId, side);
+		id++;
+	}
+}
+                                        </code>
+                                        </pre>
+                                        
+                                        <p>To explain what is actually going on in this class I will start with the initPackets method. The initPackets method first opens a new simple channel with our mod id in uppercase (ex if the mod id is soggy the channel is SOGGY). In the next method registerMessage, we take in a Side for the message to be used on the class for our handler and lastly the class for our message. There is also an ID included in the registerMethod but its use should be self explainitory, and you should never have the same ID for different packets.
+                                        <br/>
+                                        <br/>
+                                        To actually get this class to be usable you just have to call PacketHandler.initPackets(); in your CommonProxy's pre-init method (depending on when you actually send the information you may have to have this be the first thing called).
+                                        </p>
+                                        </section>
+                                    <section>
+                                        <h1>Creating messages/message handlers</h1>
+                                        
+                                        <p>
+                                        This next section will go over step by step the creation of the message/message handler class, at the end of this section will be a fully complete example. In this tutorial I will not be covering any specific task rather information on how to create your own packets. 
+                                        <br/>
+                                        <br/>
+                                        To being you are going to need to make a new class it 'should' be called Message'Action', for example if my packet will be handling trades with an entity I would call it MessageTradeHandler. This calss should implement <code>net.minecraftforge.fml.common.network.simpleimpl.IMessage</code>. When you implement this interface you are going to need to have the two methods fromBytes and toBytes.
+                                        
+                                        </p>
+                                       <pre><code>	
+@Override
+public void fromBytes(ByteBuf buf) {
+}
+
+@Override
+public void toBytes(ByteBuf buf) {
+}</code></pre>
+                                        <p>
+                                        These two methods will be responsible for sending data to and from the packet. We are going to leave these blank for now and create a constructor, we are going to NEED a empty constructor with no parameters and if we need to pass data through our packet we need to create ANOTHER constructor which takes in the data. Here is an example from one of my mods.
+                                        </p>
+                                        <pre>
+                                        <code>
+private int entityId;
+
+public MesageExtendedReachAttack() {
+}
+
+public MesageExtendedReachAttack(int eID) {
+    entityId = eID;
+}
+                                        </code>
+                                        </pre>
+                                        <p>In my above example I have the empty constructor as well as a second one for sending the entity ID that I use.
+                                        <br/>
+                                        <br/>
+                                        Now that the Message itself is setup we can continue to the Handler class. The Handler class is going to be the class that actually Handles what happens. If you want to make a new class for this you can but I will be putting my class inside of the Message. The class is going to implement IMessageHandler and will require you to override the onMessage method. The class will also require your Message class, in this case that is the class that this class is in "MessageTutorial". Below is an example of how it should look.
+                                        </p>
+                                        <pre>
+                                        <code>
+public static class Handler implements IMessageHandler&lt;MessageTutorial, IMessage&gt; {
+		@Override
+		public IMessage onMessage(MessageTutorial message, MessageContext ctx) {
+			
+			return null;
+		}
+	}
+                                        </code>
+                                        </pre>
+                                        
+                                        
+                                    </section>
+                                </section>
+
+                                <h1>Comments</h1>
+                                <div id="disqus_thread"></div>
+                                <script>
+
+                                var disqus_config = function () {
+                                this.page.url = "https://moddingtutorials.github.io/coding/networking.html";  // Replace PAGE_URL with your page's canonical URL variable
+                                this.page.identifier = "codingNetworking"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                                };
+                                
+                                (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://moddingtutorials-1.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                                })();
+                                </script>
+                                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            </section>
+						</div>
+					</div>
+
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
